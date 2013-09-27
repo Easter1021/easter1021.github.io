@@ -1,0 +1,9 @@
+.profilePic.img {
+	width: 168px;
+	float: left;
+	margin-right: 25px;
+}
+
+#main_content {
+	min-height: 250px;
+}
