@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Shopify.com 介紹</title>
+		<meta charset=utf-8>
+		<meta http-equiv=X-UA-Compatible content="IE=edge">
+		<meta name=viewport content="width=device-width,initial-scale=1">
+
+		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.1.min.js"></script>
+		<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+		<style type="text/css">
+			* {
+				letter-spacing: 2px;
+			}
+
+			body {
+				position: relative;
+				font-size: 1.5em;
+			}
+
+			.background-video {
+				opacity: 0;
+				visibility: hidden;
+				z-index: -1;
+				position: absolute;
+				bottom: 0;
+				left: 50%;
+				min-height: 100%;
+				min-width: 100%;
+				max-width: none;
+				overflow: hidden;
+				-webkit-transition: opacity 1s ease-in;
+				transition: opacity 1s ease-in;
+				-webkit-transform: translateX(-50%);
+				-ms-transform: translateX(-50%);
+				transform: translateX(-50%);
+			}
+
+			.background-video.js-is-active, .background-video--fallback.js-is-active {
+				opacity: 1;
+				visibility: visible;
+				z-index: 0;
+			}
+
+			.home__header .background-video {
+				bottom: auto;
+				top: 0;
+			}
+
+			.marketing-block--lowlight {
+			    background-color: #30373b;
+			    color: #a9a9a9;
+			}
+			.page-header--video {
+			    position: relative;
+			    overflow: hidden;
+			}
+			.home__header {
+			    padding: 4.75em 0;
+			}
+			.heading-container, .home__header {
+			    text-align: center;
+			}
+
+			.page-width {
+			    padding-left: 30px;
+			    padding-right: 30px;
+			}
+
+			.footer--main, .footer-bottom, .page-width {
+			    margin-left: auto;
+			    margin-right: auto;
+			    position: relative;
+			}
+
+			.section-heading {
+			    margin-bottom: 1.875em;
+			    text-align: center;
+			    color: #FFFFFF;
+			}
+
+			.section-heading a {
+				color: #FFFFFF;
+			}
+
+			.main {
+				margin: 2em auto;
+			}
+
+			.nav>li {
+				position: relative;
+				display: block;
+			}
+
+			/* All levels of nav */
+			.nav > li > a {
+				display: block;
+				padding: 4px 20px;
+				font-weight: 500;
+				color: #5e696c;
+			}
+			.nav > li > a:hover,
+			.nav > li > a:focus {
+				padding-left: 19px;
+				color: #f55e61;
+				text-decoration: none;
+				background-color: transparent;
+				border-left: 1px solid #f55e61;
+			}
+			.nav > .active > a,
+			.nav > .active:hover > a,
+			.nav > .active:focus > a {
+				padding-left: 18px;
+				font-weight: bold;
+				color: #f55e61;
+				background-color: transparent;
+				border-left: 2px solid #f55e61;
+			}
+
+			/* Nav: second level (shown on .active) */
+			.nav .nav {
+				display: none; /* Hide by default, but at >768px, show it */
+				padding-bottom: 10px;
+			}
+			.nav .nav > li > a {
+				padding-top: 1px;
+				padding-bottom: 1px;
+				padding-left: 30px;
+				font-weight: normal;
+			}
+			.nav .nav > li > a:hover,
+			.nav .nav > li > a:focus {
+				padding-left: 29px;
+			}
+			.nav .nav > .active > a,
+			.nav .nav > .active:hover > a,
+			.nav .nav > .active:focus > a {
+				padding-left: 28px;
+				font-weight: 500;
+			}
+			.nav > .active > ul {
+				display: block;
+			}
+
+			.nav .nav .nav > li > a {
+				padding-left: 58px;
+			}
+			.nav .nav .nav > li > a:hover,
+			.nav .nav .nav > li > a:focus {
+				padding-left: 57px;
+			}
+			.nav .nav .nav > .active > a,
+			.nav .nav .nav > .active:hover > a,
+			.nav .nav .nav > .active:focus > a {
+				padding-left: 56px;
+			}
+
+			.affix {
+				position: fixed;
+			    top: 20px;
+			}
+
+			.doc {
+				line-height: 2em;
+				color: #5e696c;
+				font-weight: normal;
+			}
+
+			.doc h1, .doc h2, .doc h3, .doc h4, .doc h5, .doc h6 {
+				font-size: 1.5em;
+				margin-top: -20px;
+				padding-top: 40px; 
+			}
+
+			.doc article {
+				padding-bottom: 10px; 
+				border-bottom: solid 1px #f55e61;
+			}
+
+			.doc article:first-child h2 {
+				margin-top: -40px;
+			}
+
+			.doc h3 {
+				font-size: 1em;
+				display: inline-block;
+			}
+
+			.doc .title, .doc b {
+				color: #f55e61;
+			}
+
+			article img {
+				width: 100%;
+				max-width: 600px;
+			}
+
+			#navbar-items {
+				min-width: 218px;
+			}
+		</style>
+	</head>
+	<body data-spy="scroll" data-target="#navbar-items">
+		<header id="intro" class="home__header home__header--tall page-header--video marketing-block--lowlight">
+
+			<video class="background-video js-is-active" role="img" aria-label="Shopify Ecommerce" data-webm-src="https://cdn.shopify.com/assets2/home-header-ccb164e69442162d3384f9f0d16075a2.webm" data-mp4-src="https://cdn.shopify.com/assets2/home-header-1e8bc21071ff014676be8b21d013cd07.mp4" data-poster="https://cdn.shopify.com/assets2/homepage/home-header-463168abcd56c853830dfc511a3d4a51.jpg" autoplay="" muted="" loop="" volume="0" canplay="false">
+				<source type="video/webm" src="https://cdn.shopify.com/assets2/home-header-ccb164e69442162d3384f9f0d16075a2.webm">
+				<source type="video/mp4" src="https://cdn.shopify.com/assets2/home-header-1e8bc21071ff014676be8b21d013cd07.mp4">
+			</video>
+
+			<div class="page-width">
+				<div class="section-heading--lowlight section-heading--flairless section-heading">
+					<h1 class="lowlight__heading section-heading__heading heading--1 ">Shopify.com 介紹</h1>
+					<p class="lowlight__heading section-heading__subhead heading--3 section-heading__flair">LINE/微信號：easter1021 | E-MAIL：<a href="mailto:mufasa.hsu@gmail.com">mufasa.hsu@gmail.com</a><br>Speaker：許益銘</p>
+				</div>
+			</div>
+
+		</header>
+		<div class="row main">
+			<div class="col-md-9 col-md-offset-1">
+				<div class="row">
+					<div class="col-md-3 hidden-sm hidden-xs">
+						<div id="navbar-items" data-spy="affix" data-offset-top="350" data-offset-bottom="200">
+							<ul class="nav" role="tablist">
+								<li>
+									<a href="#intro">網站簡介</a>
+									<ul class="nav">
+										<li><a href="#intro-ta">1. 問題、目的&群眾</a></li>
+										<li>
+											<a href="#intro-ways">2. 提供什麼服務</a>
+											<ul class="nav">
+												<li><a href="#intro-ways-images">a. 銷售管道圖</a></li>
+												<li><a href="#intro-ways-description">b. 管道說明</a></li>
+											</ul>
+										</li>
+										<li><a href="#intro-price">3. 費用</a></li>
+										<li><a href="#intro-alexa">4. Alexa排名&用戶數</a></li>
+									</ul>
+								</li>
+								<li>
+									<a href="#architecture">網站架構</a>
+									<ul class="nav">
+										<li><a href="#architecture-page">1. 頁面(Page)</a></li>
+										<li><a href="#architecture-category">2. 分類(Categrory)</a></li>
+										<li><a href="#architecture-article">3. 文章(Article)</a></li>
+									</ul>
+								</li>
+								<li><a href="#developer">開發者文件</a></li>
+								<li><a href="#support">客服/支援</a></li>
+								<li><a href="#forum">社群論譠</a></li>
+								<li><a href="#app">應用程式服務</a></li>
+								<li><a href="#final">結論</a></li>
+								<li><a href="index.html">My Profile</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-md-9 doc">
+						<article id="intro-ta">
+							<h2 class="title">1. 問題、目的&市場群眾</h2>
+							<p>在數位交易崛起的世代中，所有的賣家都想要脫離大賣場式的販售模式，並擁有自己的商品網站銷售平台。但除了礙於動不動十幾萬元起跳的網站建置費用之外，賣家與開發人員還需要面對物流、金流錯綜複雜的客製化過程。完成網站後，如果賣家還有實體店面就必須處理虛實整合的問題。對了，公司行銷人員也必須在事件的前中後，定義市場受眾、在100萬種行銷模式選擇有利的投放工具、利用大數據預測未來。不止這些，公司經營者還必須知道公司每月財務損益報表，了解每項商品毛利、每週多少人購買、轉換率、未來半年商品指名度等。這些項目需要動用的人數以及數位工具的開發成本，恐怕不是月營業額10萬的小老闆們能付擔的起的價格。</p>
+							<p>Shopify.com是國外知名的電子商務網站，他提供屬於小老闆自己的虛擬商店網站，<u>點擊註冊到完成開店只需30分鐘即可開始販賣商品服務</u>，而且物金流通通幫你搞定。平台針對電商所需要的功能提供許多有用的應用程式服務(銷售狀況、數據分析、虛實刷卡功能etc.)、新手教學/客服、眾多成功案例，平台更提供<b>一鍵銷售</b>按鈕結帳快速且費用低廉。他們鎖定的市場群眾非常清楚，就是無法花大錢搞定這一切服務的小老闆們。</p>
+							<p>接下來的篇幅，本人會針對他們提供的功能、費用、全球排名指數、網站架構等內容說明我所了解的Shopify.com。</p>
+						</article>
+						<article id="intro-ways">
+							<h2 class="title">2.提供什麼服務</h2>
+							<p>一個電子商務平台就如同我說的，Shopify.com提供的一系列能快速解決商店經營者所需要的一切功能，方便快速商品上架和流暢的購買方式，就讓我們來看看他們提供什麼功能吧。</p>
+							<ul>
+								<li>
+									<h3 class="title">銷售管道 Ways to sell</h3>
+									<span>：電商平台最關鍵的功能－銷售，照顧這時代的買家可不比以前輕鬆，首頁經營者必須面對不同買賣方式(如面交、線上刷卡)，因此多管道的銷售模式更能輕鬆接觸不同的買家，銷售更多的商品。另外，Shopify.com也提供企業級的服務，讓經營者更專注商品的銷售和經營理念，更少的平台煩惱(Focus on your business not your ecommerce platform)。</span>
+									<br><small class="text-primary">PS.針對本項下個項目會有更多說明</small>
+								</li>
+								<li>
+									<h3 class="title">有用的文章/成功案例</h3>
+									<span>：Shopify.com在網站上提供了Blog的頻道，這個頻道提供很多不同分類的文章內容、也提供使用平台的成功案例，還有成功經營者的訪談。當然，他們也不時更新最新的企業消息或者是新的功能，成功提升店老闆們的忠誠度。</span>
+								</li>
+								<li>
+									<h3 class="title">小老闆論譠</h3>
+									<span>(亂取名字)：一個成功的平台必須提供一個讓用戶之間可以討論的空間，讓每一個經營者都能提出自己問題、回答別人問題互相成長。Shopify.com看到這樣的需求，並打造這樣的空間讓全球的小老闆們有機會互相學習。</span>
+								</li>
+							</ul>
+						</article>
+						<article id="intro-ways-images">
+							<h2 class="title">2.提供什麼服務：銷售管道</h2>
+							<p>Shopify.com對銷售管道有著全方位的功能展示，包括：網站銷售平台、實體銷售介面、一鍵銷售按鈕、社群平台銷售、以及企業級電商支援等五大管道，接著，將針對每項功能深入說明。</p>
+							<img src="images/intro-ways-images.png">
+						</article>
+						<article id="intro-ways-description">
+							<h2 class="title">2.提供什麼服務：銷售管道</h2>
+							<ul>
+								<li>
+									<h3 class="title">網站銷售</h3>
+									<span>：平台提供非常快速的網站建置功能，超多符合經營者的網站樣式，讓平台用戶能快速建置屬於自己的網站店家，費用低廉且提供14天的免費使用時間。網站銷售是目前網路商家最需要的服務之一，但尤其複雜的網站項目是每個經營者都會問的。<b>像是有沒有手機版？能不能隨時佈置網站樣式？申請自己的網址會很難嗎？顧客網路付費方便嗎？我怎麼收到匯款？能不能幫我自動換算匯率？自動產生invoice有可能嗎？我想要給客人折扣？預收款可不可能？可不可以自訂CSS？能不能查看商品的銷售狀態？</b>隨便就有11個問題產生。但不要怕，Shopify.com都為你準備了，經營者只需要上傳商品，然後等者收錢就好了。</span>
+								</li>
+								<li>
+									<h3 class="title">實體銷售</h3>
+									<span>：除非你有實體店面，否則你在路上遇到潛在消費者就不可能賣東西給他。Shopify.com提供2種體積小、又輕巧的硬體設備，只要你有手機和網路就能立刻賣東西給他。更棒的是，立即更新你的庫存，寄出收據給客人。</span>
+									<br><br><img src="images/header-overview@desktop-2x-ba3f6c7728d26f70369b38ed02b77506.png">
+								</li>
+								<li>
+									<h3 class="title">一鍵銷售</h3>
+									<span>：Shopify.com針對每個上架的商品提供一個<b>按鈕</b>，透過這個功能經營者能將<b>它</b>放在任何網站，然後立即銷售你的商品。</span>
+									<br><br><img src="images/buy-button.png">
+								</li>
+								<li>
+									<h3 class="title">社群銷售</h3>
+									<span>：Shopify.com讓經營者的銷售按鈕也能在各大社群媒體平台上販售商品，而且設定更簡單，接觸很多潛在銷費者。</span>
+									<br><br><img src="images/buy-social.png">
+								</li>
+								<li>
+									<h3 class="title">企業級服務</h3>
+									<span>：如果貴公司是一間很大很大的企業，那麼你可以選擇「Enterprise ecommerce  service」，就官方網站所說的：Focus on your business not your ecommerce platform。他們會幫你設計美美獨有的銷售網站，也會幫忙協助管理。經營者只需要好好販賣商品，創造商業價值，等著收錢就好。</span>
+									<br><br><img src="images/buisiness.png">
+								</li>
+							</ul>
+						</article>
+						<article id="intro-price">
+							<h2 class="title">3.平台使用費用</h2>
+							<p>電子商務平台在這個群雄割據的時代，收費模式也是競爭力的其中一環(平台提供的服務其實更重要)。因此，這麼好用的平台，但費用很高的話也是沒人敢碰。Shopify.com也知道小老百姓們的心聲，所以他們獻給我們的費用也算是低廉，每個月只需9美元起(月租)。當然，現在的平台業者都很聰明，他們依使用者需要的收取費用(共享世代的好處)。</p>
+							<img src="images/price.png">
+						</article>
+
+						<article id="intro-alexa">
+							<h2 class="title">4.Alexa排名&用戶數</h2>
+							<p>Alexa網站排名是Amazon旗下的一家子公司，它收集世界各地的使用者行為，使用大數據針對每個網域的流量進行了分析與統計，得知每個網站的全球、地區排名，然後計算出你的網站真正價值。Shopify.com平台在世界排名477，美國排名267，過去4個月來它總排行從610名爬升到447名次(2016.03.07)。平台使用率排名：1.美國、2.印度、3.英國、4.加拿大、5. 澳洲 。<br>(看來台灣沒人在用？)</p>
+							<p>另外，據官方公告目前已超過243,000個店家在使用他們的服務(這數據在電商平台上算是滿高的)</p>
+							<img src="images/alexa.png">
+						</article>
+						<article id="architecture">
+							<h2 class="title">網站架構</h2>
+							<p>簡單易懂的網站架構是目前流行的趨勢，要建構類似Shopify.com平台我們可以運用有自訂HTML/CSS的CMS(look like wordpress)，或者從頭到尾我們採用自架，還是使用內部資源？而不管採用什麼作法，在開發之前我們必須先了解Shopify.com的網站基礎結構，以下說明架構：</p>
+							<ul>
+								<li>客製化頁面內容 Customer Pages</li>
+								<li>多項分類族群 Categrories</li>
+								<li>有分類的文章內容 Ariticles</li>
+								<li>
+									<span>更多 More：</span>
+									<ul>
+										<li>開發者文件 Developer Guide</li>
+										<li>客服/支援 Q&A and 24/7 Support</li>
+										<li>小老闆論譠 Forums</li>
+										<li>應用程式服務列表 Look like App Store or Chrome Store)</li>
+									</ul>
+								</li>
+							</ul>
+						</article>
+						<article id="architecture-page">
+							<h2 class="title">1.頁面</h2>
+							<p>在Shopify.com平台中，大多數都是使用<b>客製化頁面</b>介紹他們的產品，像是<b>Ways to sell</b>, <b>Price</b>, <b>Blog</b>, and <b>More</b>。其中，大多數的網頁都是自訂的內容(並不是文字編輯而已)，因此，當我們要做這些頁面時，如果可以採用類似wordpress的CMS，那麼在開發過程中能夠省下許多程式上的撰寫並且以提供的內容服務為主。</p>
+							<p>他們擁有4到5種頁面型態，意思是說他們並不是每頁都有屬於自己的樣式。往後在定義Layouts時，我們可以依樣式為主先討論標題項目，再討論內容的呈現方式，進而收集資源、選寫內容。採用先Layouts後選寫，可以更快速看到結果。</p>
+						</article>
+						<article id="architecture-category">
+							<h2 class="title">2.分類</h2>
+							<p>如果我們用心觀察就能夠發現，在他們客製化頁面中，其實內容都<b>穿插屬於他們文章的分類項目</b>，這種安排能讓用戶快速尋找到相關的議題。另外值得一提的，他們有一項分類頁屬於主題式的呈現方式，這能讓用戶依<b>主題</b>的方法學習平台內容。</p>
+							<img src="images/architecture-category.png">
+						</article>
+						<article id="architecture-article">
+							<h2 class="title">3.文章</h2>
+							<p>就如同說明文件一樣Shopify.com主要的網頁呈現，其實是一篇篇的文章內容，他包含各式各樣的教條式的說明。像是：</p>
+							<ul>
+								<li>
+									<h3 class="title">銷售管道 Ways to sell</h3>
+									<span>：這些頁面講述平台主要功能(或效益)，共有7個頁面說明，經營者如果運用量身訂作的功能完成他們的銷售。如 Online store, Point of sale, Buy button, Pinterest Buyable Pins, Twitter Buy Now, Facebook Shop, Enterprise。</span>
+								</li>
+								<li>
+									<h3 class="title">價錢 Price</h3>
+									<span>：使用平台的費用和每個不同月租的限制</span>
+								</li>
+								<li>
+									<h3 class="title">文章主頁 Blog</h3>
+									<span>：其中包含成功案例、訪談影片、學院(維基百科)、新人手冊等，共8個項目。</span>
+								</li>
+								<li>
+									<h3 class="title">更多 More</h3>
+									<span>：平台主要功能之外的說明內容，包含Documentation, Support, Forums, Theme store, App store, Hardware store。其中 ，App Store 是最能夠表現出這平台價值的內容。</span>
+								</li>
+							</ul>
+						</article>
+						<article id="developer">
+							<h2 class="title">開發者文件</h2>
+							<p>如題，此頁面提供如何使用Shopify.com的議題，他們包含：</p>
+							<div class="row">
+								<div class="col-md-6 col-sm-6">
+									<p><b>商品上架</b><br><span>添加和更新產品，創造禮品卡，並且分類收藏。</span></p>
+									<p><b>使用主題</b><br><span>了解Shopify主題和找到適合您的商店看看。</span></p>
+									<p><b>付款設置</b><br><span>整合您的商店與支付目關項目，或配置其他付款方式。</span></p>
+									<p><b>網域</b><br><span>建立你自己的域名，或者買一個來自我們。</span></p>
+									<p><b>應用</b><br><span>查找應用程序增加功能，驅動業務，使管理您的商店更有效率。</span></p>
+								</div>
+								<div class="col-md-6 col-sm-6">
+									<p><b>匯率設置</b><br><span>設置Shopify的默認匯率或創建覆蓋和豁免。</span></p>
+									<p><b>命令</b><br><span>查看所有的訂單，並處理相關內容。</span></p>
+									<p><b>顧客</b><br><span>了解您的客戶列表，查看客戶詳細信息和管理信息。</span></p>
+									<p><b>運送</b><br><span>選擇和管理你如何將產品給客戶。</span></p>
+									<p><b>報告和分析</b><br><span>創建和查看詳細的報告，以了解自己的業務。</span></p>
+								</div>
+							</div>
+						</article>
+						<article id="support">
+							<h2 class="title">客服/支援</h2>
+							<p>現今任何成功的平台都會提供用戶在使用功能遇到問題時，它能即時提供用戶良好的建議。因此，此頁面它必須包含幾個主題項目：熱門問題、寄信給客服、線上諮詢室、或者是電話服務。</p>
+						</article>
+						<article id="forum">
+							<h2 class="title">社群論譠</h2>
+							<p>Shopify.com提供小老闆論譠空間，這頁內容分成：</p>
+							<ul>
+								<li>
+									<h3 class="title">電子商務類的討論 Ecommerce Discussion</h3>
+									<span>：Build A Business Discussion, Feedback On My Store, Ecommerce Marketing, Payments, Shipping & Fulfilment, Wholesale & Drop Shipping, Accounting & Taxes, Manufacturing & Crowd Funding, Ecommerce Sites for Sale, Shopify Discussion</span>
+								</li>
+								<li>
+									<h3 class="title">平台的討論 Shopify Discussion</h3>
+									<span>：Shopify Design, Shopify & Ecommerce Jobs, Shopify Apps, Shopify APIs & Technology, API Announcements, Shopify POS, Shopify Mobile</span>
+								</li>
+								<li>
+									<h3 class="title">一般討論 General Discussion</h3>
+									<span>：Entrepreneurship, Off Topic Discussions</span>
+								</li>
+							</ul>
+						</article>
+						<article id="app">
+							<h2 class="title">應用程式服務</h2>
+							<p><b>重要！</b>如果平台沒有這項內容，那麼就和市面上的購物平台一樣，沒有太多的價值。Shopify.com提供不同群組的應用程式，協助經營者在電商能力，提升整體績效表現。他們分別提供各類別的服務應用：</p>
+							<ul>
+								<li>行銷類 Marketing</li>
+								<li>售銷類 Sales</li>
+								<li>社群媒體管理類 Social Media</li>
+								<li>貨運類 Shipping</li>
+								<li>庫存管理類 Inventory</li>
+								<li>訂單管理類 Accounting</li>
+								<li>顧客服務類 Customer Service</li>
+								<li>報表類 Reporting</li>
+								<li>其它工具類 Tools</li>
+							</ul>
+						</article>
+						<article id="final">
+							<h2 class="title">結論</h2>
+							<p>總體來說Shopify.com就是提供一個讓小老闆們快速建立銷售網站的平台，他們提供多種網路銷售的方式讓潛在顧客透過不同的網站平台消費，還有許多應用程式(App Store)協助經營者立即了解銷售狀況、庫存數量、報表分析等豐富的管理工具，他們也提供經營者們一個能夠互相討論的交流空間，每個月只需要9美元起。</p>
+							<p>最後用一句Shopify.com說的話來做總結，在未來的世界裡，老闆們依舊在經營自己的品牌、銷售優秀的產品，創造屬於自己的故事，其它的事就交給Shopify.com吧！</p>
+							<p>專注商品的銷售和經營理念，更少的平台煩惱 <br>Focus on your business not your ecommerce platform</p>
+						</article>
+						<h6 class="text-center">Thanks for your attention.</h6>
+						<p class="text-center">LINE/微信號：easter1021<br>E-MAIL：<a href="mailto:mufasa.hsu@gmail.com">mufasa.hsu@gmail.com</a><br>Speaker：許益銘</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
