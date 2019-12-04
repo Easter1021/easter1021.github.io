@@ -159,6 +159,8 @@ $(function () {
             alert('複製成功!');
         }
     });
+
+    commentBox('5765278868701184-proj');
     
   $(window).scroll(function () {
     if ($(this).scrollTop() > 100) {
