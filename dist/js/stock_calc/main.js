@@ -124,6 +124,7 @@ function calc (event) {
     });
 
     $('[name="base"]').attr('disabled', 'disabled');
+    $('.info').addClass('hidden');
 }
 
 $(function () {

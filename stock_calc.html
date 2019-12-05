@@ -20,7 +20,7 @@
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="dist/css/stock_calc/main.css?t=20191205002">
+    <link rel="stylesheet" href="dist/css/stock_calc/main.css?t=20191205003">
     
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -56,7 +56,10 @@
                     <form action="stock_calc.html" method="GET">
                         <div class="row">
                             <div class="col-md-12">
-                                <a href="#commentbox" class="pull-right"><i class="fa fa-comments"></i>&nbsp;站台留言</a>
+                              <div class="pull-left">
+                                <span class="text-danger info"><i class="fa fa-hand-o-down"></i>&nbsp;只需要填買入價</span>
+                              </div>
+                              <a href="#commentbox" class="pull-right"><i class="fa fa-comments"></i>&nbsp;站台留言</a>
                             </div>
                         </div>
                         <div class="row">
@@ -165,6 +168,6 @@
     <!-- 免費留言插件 -->
     <script src="https://unpkg.com/commentbox.io/dist/commentBox.min.js"></script>
 
-    <script src="dist/js/stock_calc/main.js?t=20191205002"></script>
+    <script src="dist/js/stock_calc/main.js?t=20191205003"></script>
   </body>
 </html>
