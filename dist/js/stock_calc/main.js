@@ -139,10 +139,6 @@ function calc (event) {
 }
 
 $(function () {
-    $('form').on('submit', vv);
-    $('input[name="dangchong"]').on('change', function () {
-        $('[name="tax"]').val($(this).is(':checked') ? 0.15 : 0.3);
-    });
 
     $('input').each(function() {
         var paramValue = getParam(this.name);
@@ -155,12 +151,17 @@ $(function () {
             this.checked = true;
     });
 
+    calc.call($('form').get(0));
+
     $('input')
         .on('change', function (event) { calc.call($('form').get(0)); })
         .on('click', function (event) { $(this).select(); });
     $('[name="buy"]').trigger('click');
 
-    calc.call($('form').get(0));
+    $('form').on('submit', vv);
+    $('input[name="dangchong"]').on('change', function () {
+        $('[name="tax"]').val($(this).is(':checked') ? 0.15 : 0.3);
+    });
 
     $('#share').on('click', function (event) {
         if (navigator.share) {
