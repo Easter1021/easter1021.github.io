@@ -150,7 +150,6 @@ $(function () {
     calc.call($('form').get(0));
 
     $('input[type="text"]')
-        .on('change', function (event) { calc.call($('form').get(0)); })
         .on('click', function (event) { $(this).select(); });
     $('[name="buy"]').trigger('click');
 
