@@ -134,8 +134,6 @@ function calc (event) {
     $('.info').addClass('hidden');
 }
 
-$(function () {
-
     $('input').each(function() {
         var paramValue = getParam(this.name);
         if(this.value == "" && paramValue != "") this.value = paramValue;
@@ -190,4 +188,3 @@ $(function () {
       $('.scroll-top').fadeOut();
     }
   });
-});
