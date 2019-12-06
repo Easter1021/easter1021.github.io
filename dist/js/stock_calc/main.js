@@ -154,7 +154,7 @@ function calc (event) {
     $('form').on('submit', vv);
     $('input[name="dangchong"]').on('change', function () {
         $('[name="tax"]').val($(this).is(':checked') ? 0.15 : 0.3);
-        $('[name="tax"]').trigger('change');
+        calc.call($('form').get(0));
     });
 
     $('#share').on('click', function (event) {
