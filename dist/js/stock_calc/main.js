@@ -49,6 +49,8 @@ function calc (event) {
         return false;
     }
 
+    $('[name="base"]').removeAttr('disabled');
+
     var fixed = 1, minFee = 20, base = 1.0;
     if(formObject.buy < 10) {
         base = 0.01;
@@ -66,6 +68,10 @@ function calc (event) {
     }
     $('[name="base"]').val(base);
     
+    if($('[name="dangchong"]').is(':checked')) {
+        $('[name="tax"]').val(0.15);
+    }
+
     if(isNaN(formObject.start))
         $('[name="start"]').val(formObject.buy);
 
@@ -118,6 +124,11 @@ function calc (event) {
     Mustache.parse(template);
     var rendered = Mustache.render(template, formObject);
     $('#target').html(rendered);
+    $('[data-spy="affix"]').affix({
+        offset: {
+            top: 400
+        }
+    })
 
     $('.money').map(function () {
         $(this).text(formatNumber($(this).text()));
@@ -129,13 +140,25 @@ function calc (event) {
 
 $(function () {
     $('form').on('submit', vv);
-    $('input').on('click', function (event) { $(this).select(); });
-    $('[name="buy"]').trigger('click');
+    $('input[name="dangchong"]').on('change', function () {
+        $('[name="tax"]').val($(this).is(':checked') ? 0.15 : 0.3);
+    });
 
     $('input').each(function() {
         var paramValue = getParam(this.name);
         if(this.value == "" && paramValue != "") this.value = paramValue;
     });
+
+    $('input[type="checkbox"]').each(function() {
+        var paramValue = getParam(this.name);
+        if(paramValue === "on")
+            this.checked = true;
+    });
+
+    $('input')
+        .on('change', function (event) { calc.call($('form').get(0)); })
+        .on('click', function (event) { $(this).select(); });
+    $('[name="buy"]').trigger('click');
 
     calc.call($('form').get(0));
 

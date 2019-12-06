@@ -20,7 +20,7 @@
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="dist/css/stock_calc/main.css?t=20191206001">
+    <link rel="stylesheet" href="dist/css/stock_calc/main.css?t=20191206002">
     
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -80,8 +80,8 @@
                                 <input type="text" name="fee" class="form-control" value="">
                             </div>
                             <div class="form-group col-xs-4 percentage">
-                                <label>交易稅</label>
-                                <input type="text" name="tax" class="form-control" value="">
+                                <label>手續費折扣</label>
+                                <input type="text" name="discount" class="form-control" value="">
                             </div>
                             <div class="form-group col-xs-4">
                                 <label style="display: block;">&nbsp;</label>
@@ -89,10 +89,18 @@
                             </div>
                           </div>
                           <div class="row">
-                            <div class="form-group col-xs-4 percentage">
-                                <label>手續費折扣</label>
-                                <input type="text" name="discount" class="form-control" value="">
-                            </div>
+                              <div class="form-group col-xs-4 percentage">
+                                  <label>交易稅</label>
+                                  <input type="text" name="tax" class="form-control" value="">
+                              </div>
+                              <div class="form-group col-xs-8">
+                                <label>&nbsp;</label>
+                                <div class="form-control">
+                                  <label>
+                                    <input type="checkbox" name="dangchong"> 當沖
+                                  </label>
+                                </div>
+                              </div>
                           </div>
                           <div class="row">
                             <div class="form-group col-xs-4 start">
@@ -166,6 +174,6 @@
     <!-- 免費留言插件 -->
     <script src="https://unpkg.com/commentbox.io/dist/commentBox.min.js"></script>
 
-    <script src="dist/js/stock_calc/main.js?t=20191206001"></script>
+    <script src="dist/js/stock_calc/main.js?t=20191206002"></script>
   </body>
 </html>
