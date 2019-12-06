@@ -120,7 +120,7 @@ function calc (event) {
 
     formObject = _.extend(formObject, calcObject);
     
-    var template = '<div class="no-padding"> <div data-spy="affix" data-offset-top="440"> <div class="text-center"> <a href="stock_calc.html" class="text-danger">[&nbsp;<i class="fa fa-refresh"></i>&nbsp;重新計算&nbsp;]</a> </div> <table class="table"> <thead> <tr> <th>持有成本</th> <th> <span class="money">{{holdingCost}}</span>&nbsp; <small class="text-muted">( {{holdingBuy}} + {{holdingFee}} )</small> </th> </tr> <tr> <th>買入手續費</th> <th> <span class="money">{{holdingFee}}</span> </th> </tr> </thead> </table> </div> <table class="table table-striped"> <thead> <tr> <th class="text-center">賣出股價</th> <th>損益</th> <th>明細</th> </tr> </thead> <tbody> {{#sell}} <tr> <td class="text-center text-{{textClass}}">{{price}}</td> <td> <strong class="money text-{{textClass}}">{{profit}}</strong><br> <small> <span class="text-muted">報酬率：</span> <span class="text-{{textClass}}">{{pp}}%</span> </small> </td> <td> <span>收入：</span> <small class="money">{{value}}</small><br> <span>賣出手續費：</span> <small class="money">{{fee}}</small><br> <span>交易稅：</span> <small class="money">{{tax}}</small><br> <span>成本：</span> <small class="money">{{rawCost}}</small> </td> </tr> {{/sell}} </tbody> </table></div>';
+    var template = '<div class="no-padding"> <div data-spy="affix" data-offset-top="440"> <div class="text-center"> <a href="stock_calc.html" class="text-danger">[&nbsp;<i class="fa fa-refresh"></i>&nbsp;重新計算&nbsp;]</a> </div> <table class="table"> <thead> <tr> <th>持有成本</th> <th> <span class="money">{{holdingCost}}</span>&nbsp; <small class="text-muted">( {{holdingBuy}} + {{holdingFee}} )</small> </th> </tr> <tr> <th>買入手續費</th> <th> <span class="money">{{holdingFee}}</span> {{#dangchong}}<div class="pull-right"><i class="fa fa-check text-aqua"></i>&nbsp;當沖</div>{{/dangchong}}</th> </tr> </thead> </table> </div> <table class="table table-striped"> <thead> <tr> <th class="text-center">賣出股價</th> <th>損益</th> <th>明細</th> </tr> </thead> <tbody> {{#sell}} <tr> <td class="text-center text-{{textClass}}">{{price}}</td> <td> <strong class="money text-{{textClass}}">{{profit}}</strong><br> <small> <span class="text-muted">報酬率：</span> <span class="text-{{textClass}}">{{pp}}%</span> </small> </td> <td> <span>收入：</span> <small class="money">{{value}}</small><br> <span>賣出手續費：</span> <small class="money">{{fee}}</small><br> <span>交易稅：</span> <small class="money">{{tax}}</small><br> <span>成本：</span> <small class="money">{{rawCost}}</small> </td> </tr> {{/sell}} </tbody> </table></div>';
     Mustache.parse(template);
     var rendered = Mustache.render(template, formObject);
     $('#target').html(rendered);
@@ -147,13 +147,13 @@ $(function () {
 
     $('input[type="checkbox"]').each(function() {
         var paramValue = getParam(this.name);
-        if(paramValue === "on")
+        if(paramValue === "1")
             this.checked = true;
     });
 
     calc.call($('form').get(0));
 
-    $('input')
+    $('input[type="text"]')
         .on('change', function (event) { calc.call($('form').get(0)); })
         .on('click', function (event) { $(this).select(); });
     $('[name="buy"]').trigger('click');
@@ -161,6 +161,7 @@ $(function () {
     $('form').on('submit', vv);
     $('input[name="dangchong"]').on('change', function () {
         $('[name="tax"]').val($(this).is(':checked') ? 0.15 : 0.3);
+        $('[name="tax"]').trigger('change');
     });
 
     $('#share').on('click', function (event) {
