@@ -36,6 +36,7 @@ function formData(serializeArray) {
     }, {});
 }
 
+var calcTimeout;
 function calc (event) {
     
     var form = formData($(this).serializeArray());
@@ -57,8 +58,8 @@ function calc (event) {
         $('.info').removeClass('hidden');
         return false;
     }
+    $('.calcing').show();
     $('[name="buy"]', this).closest('.form-group').removeClass('has-error');
-    $('.overlay').removeClass('hidden');
 
     $('[name="base"]', this).removeAttr('disabled');
 
@@ -148,11 +149,8 @@ function calc (event) {
     form.pageTitle = "買入 $" + form.buy + " 的股票需要漲多少才能獲利?";
     history.pushState(form, form.pageTitle, "?" + $(this).serialize())
 
-    setTimeout(() => {
-        $('.overlay').addClass('hidden');
-    }, 1000 * 0.4);
-
     document.title = form.pageTitle;
+    $('.calcing').fadeOut(1000 * 1);
 
     return false;
 }
@@ -162,12 +160,16 @@ calc.call($('form').get(0));
 
 $('form').on('submit', calc);
 $('input[type="text"]')
-    .on('change', function (event) { $('form').trigger('submit'); })
+    .on('keyup', function (event) { 
+        if(calcTimeout)
+            clearTimeout(calcTimeout);
+        calcTimeout = setTimeout(calc.bind($('form').get(0)), 1000 * 1);
+    })
     .on('click', function (event) { $(this).select(); });
 $('[name="buy"]').trigger('click');
 $('input[name="dangchong"]').on('change', function () {
     $('[name="tax"]').val($(this).is(':checked') ? 0.15 : 0.3);
-    $('[name="tax"]').trigger('change');
+    $('[name="tax"]').trigger('keyup');
 });
 
 $('#share').on('click', function (event) {
