@@ -58,6 +58,7 @@ function calc (event) {
         return false;
     }
     $('[name="buy"]', this).closest('.form-group').removeClass('has-error');
+    $('.overlay').removeClass('hidden');
 
     $('[name="base"]', this).removeAttr('disabled');
 
@@ -146,6 +147,10 @@ function calc (event) {
     var form = formData($(this).serializeArray());
     form.pageTitle = "買入 $" + form.buy + " 的股票需要漲多少才能獲利?";
     history.pushState(form, form.pageTitle, "?" + $(this).serialize())
+
+    setTimeout(() => {
+        $('.overlay').addClass('hidden');
+    }, 1000 * 0.4);
 
     document.title = form.pageTitle;
 
