@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="dist/css/stock_calc/main.css?t=20191207004">
+    <link rel="stylesheet" href="dist/css/stock_calc/main.css?t=20191208001">
     
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -114,8 +114,8 @@
                                 <input type="text" name="end" class="form-control">
                             </div>
                             <div class="form-group col-xs-4">
-                                <label>股價遞增數</label>
-                                <input type="text" name="base" class="form-control" value="">
+                                <label>&nbsp;</label>
+                                <a href="#base_description" class="btn btn-sm btn-link form-control"><i class="fa fa-info-circle"></i>&nbsp;<span class=" text-info">基數遞增說明</span></a>
                             </div>
                           </div>
                     </form>
@@ -127,12 +127,13 @@
                       <h3>公式&說明：</h3>
                       <ul>
                           <li>導入範例： <a href="stock_calc.html?buy=200&number=5&fee=0.1425&tax=0.3&discount=50&start=250&end=250">Demo</a></li>
-                          <li>1張 = 1000股</li>
-                          <li>持股成本： 買價 x 股數 + 買價 x 股數 x 手續費</li>
-                          <li>賣出成本： 賣價 x 股數 x 手續費 + 賣價 x 股數 x 交易稅</li>
+                          <li>1張 = 1000股; 0.3張 = 300股</li>
+                          <li>持股成本： 買價 x 股數 + 買入手續費</li>
+                          <li>賣出成本： 賣出手續費 + 交易稅</li>
+                          <li>總成本： 買入手續費 + 賣出手續費 + 交易稅</li>
                           <li>獲利金額： 賣價 x 股數 - 持股成本 - 賣出成本</li>
                           <li>報酬率： 獲利金額 / 買價 x 股數</li>
-                          <li>根據股價不同的遞增基數自動計算
+                          <li id="base_description">根據股價不同的遞增基數自動計算
                               <ul>
                                 <li>每股市價未滿10元者，股價升降單位為0.01元</li>
                                 <li>10元至未滿50元者為0.05元</li>
@@ -191,6 +192,6 @@
     <!-- 免費留言插件 -->
     <script src="https://unpkg.com/commentbox.io/dist/commentBox.min.js"></script>
 
-    <script src="dist/js/stock_calc/main.js?t=20191207004"></script>
+    <script src="dist/js/stock_calc/main.js?t=20191208001"></script>
   </body>
 </html>

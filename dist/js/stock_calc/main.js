@@ -1,7 +1,8 @@
 
 function formatNumber(n) {
+    let pre = (n < 0) ? "-" : "";
     // format number 1000000 to 1,234,567
-    return n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    return pre + n.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 function fillParamToInputs() {
@@ -36,6 +37,32 @@ function formData(serializeArray) {
     }, {});
 }
 
+function calcBase(price) {
+    if(price < 10) {
+        return 0.01;
+    }
+    else if(price < 50) {
+        return 0.05;
+    }
+    else if(price < 100) {
+        return 0.1;
+    }
+    else if(price < 500) {
+        return 0.5;
+    }
+    else 
+        return 1.0;
+}
+
+function calcFixed(price) {
+    if(price < 50)
+        return 2;
+    else if (price < 1000)
+        return 1;
+    else 
+        return 0;
+}
+
 var calcTimeout;
 function calc (event) {
     
@@ -61,24 +88,7 @@ function calc (event) {
     $('.calcing').show();
     $('[name="buy"]', this).closest('.form-group').removeClass('has-error');
 
-    $('[name="base"]', this).removeAttr('disabled');
-
-    var fixed = 1, minFee = 20, base = 1.0;
-    if(form.buy < 10) {
-        base = 0.01;
-        fixed = 2;
-    }
-    else if(form.buy < 50) {
-        base = 0.05;
-        fixed = 2;
-    }
-    else if(form.buy < 100) {
-        base = 0.1;
-    }
-    else if(form.buy < 500) {
-        base = 0.5;
-    }
-    $('[name="base"]', this).val(base);
+    var minFee = 20; // 最低手續費 // fixed 顯示小數點後幾位
 
     if(isNaN(form.start))
         $('[name="start"]', this).val(form.buy);
@@ -104,8 +114,11 @@ function calc (event) {
         calcData.holdingFee = minFee;
     calcData.holdingCost = calcData.holdingBuy + calcData.holdingFee;
 
-    var price = form.start;
+    var price = form.start,
+        count = 0;
     do {
+        fixed = calcFixed(price);
+
         var row = {
             price: price.toFixed(fixed),
             fee: Math.ceil(price * form.number * form.fee / 100),
@@ -122,8 +135,10 @@ function calc (event) {
         row.pp = row.pp.toFixed(3);
         row.textClass = (row.profit > 0) ? "red" : "green";
         calcData.sell.push(row);
-        price = price + form.base;
+        price = price + calcBase(price);
         price = parseFloat(price.toFixed(fixed), 10);
+        if(++count > 500)
+            break;
     } while(price <= form.end.toFixed(fixed));
 
     form = _.extend(form, calcData);
