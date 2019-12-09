@@ -76,3 +76,7 @@ small.money {
 #target .no-padding [data-spy="affix"].affix + * {
     margin-top: 102px;
 }
+
+#btn-unit label {
+    border-radius: 50%; width: 34px; height: 34px; padding-top: 6px; margin-right: 5px;
+}

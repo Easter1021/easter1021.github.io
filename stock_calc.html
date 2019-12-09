@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="dist/css/stock_calc/main.css?t=20191208001">
+    <link rel="stylesheet" href="dist/css/stock_calc/main.css?t=20191210001">
     
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -68,12 +68,21 @@
                                 <input type="text" name="buy" class="form-control" placeholder="">
                             </div>
                             <div class="form-group col-xs-4">
-                                <label>交易張數</label>
+                                <label>交易數量</label>
                                 <input type="text" name="number" class="form-control" placeholder="1張=1000股">
                             </div>
                             <div class="form-group col-xs-4">
-                                <label style="display: block;">&nbsp;</label>
-                                <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-line-chart">&nbsp;</i>計算</button>
+                                <label>&nbsp;</label>
+                                <div id="btn-unit">
+                                  <div class="btn-group" data-toggle="buttons">
+                                    <label class="btn btn-sm btn-info active">
+                                      <input type="radio" id="unit1" name="unit" value="lot" autocomplete="off" checked="checked"> 張
+                                    </label>
+                                    <label class="btn btn-sm btn-default">
+                                      <input type="radio" id="unit2" name="unit" value="stock" autocomplete="off"> 股
+                                    </label>
+                                  </div>
+                                </div>
                             </div>
                           </div>
                           <div class="row">
@@ -87,7 +96,7 @@
                             </div>
                             <div class="form-group col-xs-4">
                                 <label style="display: block;">&nbsp;</label>
-                                <button id="share" type="button" class="btn btn-primary btn-warning btn-block">分享結果</button>
+                                <button type="submit" class="btn btn-primary btn-block" data-loading-text='<i class="fa fa-refresh fa-spin"></i>&nbsp;計算中...''><i class="fa fa-line-chart">&nbsp;</i>計算</button>
                             </div>
                           </div>
                           <div class="row">
@@ -95,13 +104,17 @@
                                   <label>交易稅</label>
                                   <input type="text" name="tax" class="form-control" value="">
                               </div>
-                              <div class="form-group col-xs-8">
+                              <div class="form-group col-xs-4">
                                 <label>&nbsp;</label>
                                 <div class="form-control">
                                   <label style="width: 100%;">
                                     <input type="checkbox" name="dangchong" value="1"> 當沖
                                   </label>
                                 </div>
+                              </div>
+                              <div class="form-group col-xs-4">
+                                  <label style="display: block;">&nbsp;</label>
+                                  <button id="share" type="button" class="btn btn-primary btn-warning btn-block">分享結果</button>
                               </div>
                           </div>
                           <div class="row">
@@ -192,6 +205,6 @@
     <!-- 免費留言插件 -->
     <script src="https://unpkg.com/commentbox.io/dist/commentBox.min.js"></script>
 
-    <script src="dist/js/stock_calc/main.js?t=20191208001"></script>
+    <script src="dist/js/stock_calc/main.js?t=20191210001"></script>
   </body>
 </html>

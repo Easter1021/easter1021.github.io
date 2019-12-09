@@ -18,6 +18,9 @@ function fillParamToInputs() {
                 if(paramValue != "") 
                     this.value = paramValue;
                 break;
+            case "radio":
+                this.checked = (this.value == paramValue);
+                break;
         }
     });
 }
@@ -85,8 +88,10 @@ function calc (event) {
         $('.info').removeClass('hidden');
         return false;
     }
+    $('[type="submit"]', this).button('loading');
     $('.calcing').show();
     $('[name="buy"]', this).closest('.form-group').removeClass('has-error');
+    $('.info').addClass('hidden');
 
     var minFee = 20; // 最低手續費 // fixed 顯示小數點後幾位
 
@@ -98,10 +103,11 @@ function calc (event) {
 
     form = formData($(this).serializeArray());
 
-    form.number = form.number * 1000;
+    if($('#btn-unit label.active input', this).val() == "lot")
+        form.number = form.number * 1000;
 
     var calcData = {
-        holdingBuy: form.buy * form.number,
+        holdingBuy: Math.ceil(form.buy * form.number),
         holdingFee: 0,
         holdingCost: 0,
         sell: []
@@ -143,29 +149,29 @@ function calc (event) {
 
     form = _.extend(form, calcData);
     
-    var template = '<div class="no-padding"> <div data-spy="affix" data-offset-top="440"> <div class="text-center"> <a href="stock_calc.html" class="text-danger">[&nbsp;<i class="fa fa-refresh"></i>&nbsp;重新計算&nbsp;]</a> </div> <table class="table"> <thead> <tr> <th>持有成本</th> <th> <span class="money">{{holdingCost}}</span>&nbsp; <small class="text-muted">( {{holdingBuy}} + {{holdingFee}} )</small> </th> </tr> <tr> <th>買入手續費</th> <th> <span class="money">{{holdingFee}}</span> {{#dangchong}}<div class="pull-right text-aqua"><i class="fa fa-check"></i>&nbsp;當沖</div>{{/dangchong}}</th> </tr> </thead> </table> </div> <table class="table table-striped"> <thead> <tr> <th class="text-center">賣出股價</th> <th>損益</th> <th>明細</th> </tr> </thead> <tbody> {{#sell}} <tr> <td class="text-center text-{{textClass}}">{{price}}</td> <td> <strong class="money text-{{textClass}}">{{profit}}</strong><br> <small> <span class="text-muted">報酬率：</span> <span class="text-{{textClass}}">{{pp}}%</span> </small> </td> <td> <span>收入：</span> <small class="money">{{value}}</small><br> <span>賣出手續費：</span> <small class="money">{{fee}}</small><br> <span>交易稅：</span> <small class="money">{{tax}}</small><br> <span>成本：</span> <small class="money">{{rawCost}}</small> </td> </tr> {{/sell}} </tbody> </table></div>';
-    Mustache.parse(template);
-    var rendered = Mustache.render(template, form);
-    $('#target').html(rendered);
-    $('[data-spy="affix"]').affix({
-        offset: {
-            top: 400
-        }
-    })
+    setTimeout((function () {
 
-    $('.money').map(function () {
-        $(this).text(formatNumber($(this).text()));
-    });
+        var template = '<div class="no-padding"> <div data-spy="affix" data-offset-top="440"> <div class="text-center"> <a href="stock_calc.html" class="text-danger">[&nbsp;<i class="fa fa-refresh"></i>&nbsp;重新計算&nbsp;]</a> </div> <table class="table"> <thead> <tr> <th>持有成本</th> <th> <span class="money">{{holdingCost}}</span>&nbsp; <small class="text-muted">( {{holdingBuy}} + {{holdingFee}} )</small> </th> </tr> <tr> <th>買入手續費</th> <th> <span class="money">{{holdingFee}}</span> {{#dangchong}}<div class="pull-right text-aqua"><i class="fa fa-check"></i>&nbsp;當沖</div>{{/dangchong}}</th> </tr> </thead> </table> </div> <table class="table table-striped"> <thead> <tr> <th class="text-center">賣出股價</th> <th>損益</th> <th>明細</th> </tr> </thead> <tbody> {{#sell}} <tr> <td class="text-center text-{{textClass}}">{{price}}</td> <td> <strong class="money text-{{textClass}}">{{profit}}</strong><br> <small> <span class="text-muted">報酬率：</span> <span class="text-{{textClass}}">{{pp}}%</span> </small> </td> <td> <span>收入：</span> <small class="money">{{value}}</small><br> <span>賣出手續費：</span> <small class="money">{{fee}}</small><br> <span>交易稅：</span> <small class="money">{{tax}}</small><br> <span>成本：</span> <small class="money">{{rawCost}}</small> </td> </tr> {{/sell}} </tbody> </table></div>';
+        Mustache.parse(template);
+        var rendered = Mustache.render(template, this.form);
+        $('#target').html(rendered);
+        $('[data-spy="affix"]').affix({offset: { top: 400 } });
+        // $('.money').map(function () {
+        //     $(this).text(formatNumber($(this).text()));
+        // });
+    
+        form = formData($(this.self).serializeArray());
+        form.pageTitle = "買入 $" + form.buy + " 的股票需要漲多少才能獲利?";
+        history.pushState(form, form.pageTitle, "?" + $(this.self).serialize())
+    
+        document.title = form.pageTitle;
 
-    $('[name="base"]').attr('disabled', 'disabled');
-    $('.info').addClass('hidden');
-
-    var form = formData($(this).serializeArray());
-    form.pageTitle = "買入 $" + form.buy + " 的股票需要漲多少才能獲利?";
-    history.pushState(form, form.pageTitle, "?" + $(this).serialize())
-
-    document.title = form.pageTitle;
-    $('.calcing').fadeOut(1000 * 1);
+        $('[type="submit"]').button('reset');
+        $('.calcing').fadeOut();
+    }).bind({
+        self: this,
+        form: form
+    }), 1000);
 
     return false;
 }
@@ -174,7 +180,7 @@ fillParamToInputs();
 calc.call($('form').get(0));
 
 $('form').on('submit', calc);
-$('input[type="text"]')
+$('form input[type="text"]')
     .on('keyup', function (event) { 
         if(calcTimeout)
             clearTimeout(calcTimeout);
@@ -182,10 +188,18 @@ $('input[type="text"]')
     })
     .on('click', function (event) { $(this).select(); });
 $('[name="buy"]').trigger('click');
-$('input[name="dangchong"]').on('change', function () {
+$('form input[name="dangchong"]').on('change', function () {
     $('[name="tax"]').val($(this).is(':checked') ? 0.15 : 0.3);
     $('[name="tax"]').trigger('keyup');
 });
+
+$('#btn-unit').on('change', 'label', function (event) {
+    $('label', event.delegateTarget).removeClass('btn-info active').addClass('btn-default');
+    $(this).addClass('btn-info active');
+    $('input', this).attr('checked', true);
+    $('form').trigger('submit');
+});
+$('#btn-unit label input:checked').closest('label').trigger('change');
 
 $('#share').on('click', function (event) {
     event.preventDefault();
